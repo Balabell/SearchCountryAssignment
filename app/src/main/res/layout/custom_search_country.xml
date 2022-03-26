@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+<!--    <EditText-->
+<!--        android:id="@+id/country_code_picker_search"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingStart="8dp"-->
+<!--        android:paddingEnd="8dp"-->
+<!--        android:hint="Enter your city"/>-->
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/country_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFAF0"
+        app:queryHint="Enter city"
+        android:textCursorDrawable="@null"
+        android:autofillHints="2"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@null" />
+
+</LinearLayout>

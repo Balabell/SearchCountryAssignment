@@ -8,12 +8,12 @@ import java.io.IOException
 
 class CountrySearchPresenter(private val view: CountrySearchInterface) {
 
-     fun setupView(context: Context) {
+    fun setupView(context: Context) {
+//        view.showLoading()
         getCountryList(context)
     }
 
     private fun getCountryList(context: Context) {
-
         lateinit var jsonString: String
         try {
             jsonString =
@@ -23,10 +23,16 @@ class CountrySearchPresenter(private val view: CountrySearchInterface) {
             ioException.printStackTrace()
             return
         }
-
         val listCountryType = object : TypeToken<ArrayList<Country>>() {}.type
         val countryList: ArrayList<Country> = Gson().fromJson(jsonString, listCountryType)
 
-        view.setupAdapter(countryList)
+        countryList.sortBy {
+            it.name
+        }
+
+        view.apply {
+            setupAdapter(countryList)
+            setupSearch()
+        }
     }
 }

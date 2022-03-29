@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SearchCountry">
         <activity
-            android:name=".view.activity.CountryLandingPageActivity"
+            android:name=".view.activity.CountrySearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

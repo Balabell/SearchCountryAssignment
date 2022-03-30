@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_country_search.xml" value="0.189209726443769" />
         <entry key="app/src/main/res/layout/country_search_landing_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_country_list.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/custom_search_country.xml" value="0.4036458333333333" />

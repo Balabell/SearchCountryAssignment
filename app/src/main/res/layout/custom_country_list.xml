@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="8dp"
     android:paddingStart="16dp"
+    android:paddingTop="8dp"
     android:paddingEnd="16dp">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Sydney, AU" />
+        tools:text="Sydney, AU" />
 
     <TextView
         android:id="@+id/tv_lat"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="lat : 44.549999" />
+        tools:text="lat : 44.549999" />
 
     <TextView
         android:id="@+id/tv_lon"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="long : 34.283333" />
+        tools:text="long : 34.283333" />
 
     <View
         android:layout_width="match_parent"

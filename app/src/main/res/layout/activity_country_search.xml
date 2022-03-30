@@ -6,31 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/progressBarHolder"
-        android:animateLayoutChanges="true"
-        android:visibility="gone"
-        android:alpha="0.4"
-        android:background="#000000"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
-<!--        <ProgressBar-->
-<!--            android:id="@+id/pb_loading"-->
-<!--            style="@android:attr/progressBarStyleLarge"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_vertical" />-->
-
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_country_search"
         android:layout_width="match_parent"
@@ -43,14 +18,20 @@
         app:queryBackground="@null"
         app:queryHint="Enter city" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_country_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         tools:itemCount="5"
         tools:listitem="@layout/custom_country_list" />
-
 
     <LinearLayout
         android:id="@+id/ll_no_search_found"
@@ -66,16 +47,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="No results found"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/no_results_found_title" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Please make sure that city is correct."
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:text="@string/no_results_found_description" />
     </LinearLayout>
 
 </LinearLayout>

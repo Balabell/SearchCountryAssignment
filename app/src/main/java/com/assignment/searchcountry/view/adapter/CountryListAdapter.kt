@@ -11,15 +11,14 @@ import com.assignment.searchcountry.databinding.CustomCountryListBinding
 import com.assignment.searchcountry.model.Country
 
 class CountryListAdapter(
-    private val countryList: ArrayList<Country>,
+    private val countryList: MutableList<Country>,
     private val countryListener: CountryListListener
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var countryFilterList = ArrayList<Country>()
+    private var countryFilterList: MutableList<Country>
 
     lateinit var context: Context
-    // parent.context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
@@ -28,80 +27,54 @@ class CountryListAdapter(
         return CountryListAdapterViewHolder(binding)
     }
 
-    // size = 209557
     init {
         countryFilterList = countryList
     }
 
+    fun getCountryList(): MutableList<Country> {
+        return countryList
+    }
+
+    fun updateCountryList(countryFilterList: MutableList<Country>) {
+        this.countryFilterList = countryFilterList
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val countryHolder = holder as CountryListAdapterViewHolder
-
-        val countryName =
-            countryFilterList[position].name + ", " + countryFilterList[position].country
-
-        countryHolder.viewBinding.tvCountry.text = countryName
-        countryHolder.viewBinding.tvLat.text = countryFilterList[position].coord.lat.toString()
-        countryHolder.viewBinding.tvLon.text = countryFilterList[position].coord.lon.toString()
-
-
-        holder.itemView.setOnClickListener {
-            countryListener.onClickItem(countryFilterList[position])
-        }
+        (holder as CountryListAdapterViewHolder).bindData(
+            countryFilterList[position],
+            countryListener
+        )
     }
 
     override fun getItemCount(): Int {
         return countryFilterList.size
     }
 
-    class CountryListAdapterViewHolder(val viewBinding: CustomCountryListBinding) :
-        RecyclerView.ViewHolder(viewBinding.root)
+    class CountryListAdapterViewHolder(private val viewBinding: CustomCountryListBinding) :
+        RecyclerView.ViewHolder(viewBinding.root) {
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val filterResults = FilterResults()
+        fun bindData(
+            country: Country,
+            countryListener: CountryListListener
+        ) {
+            val countryName = "${country.name}, ${country.country}"
+            val lat = "lat : ${country.coord.lat}"
+            val long = "lon : " + country.coord.lon.toString()
 
-                if (constraint.isNullOrEmpty()) {
-                    filterResults.apply {
-                        values = countryList
-                        count = countryList.size
-                    }
-                } else {
-                    val filterList = getFilterList(constraint, countryList)
-                    filterResults.apply {
-                        values = filterList
-                        count = filterList.size
-                    }
-                }
-                return filterResults
-            }
+            viewBinding.apply {
+                tvCountry.text = countryName
+                tvLat.text = lat
+                tvLon.text = long
 
-            @SuppressLint("NotifyDataSetChanged")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                results?.let {
-                    if (it.count == 0) {
-                        countryListener.onSearchNotFound()
-                    } else {
-                        countryListener.onSearchFound()
-                        countryFilterList = it.values as ArrayList<Country>
-                        notifyDataSetChanged()
-                    }
+                root.setOnClickListener {
+                    countryListener.onClickItem(country)
                 }
             }
         }
     }
 
-    private fun getFilterList(
-        constraint: CharSequence,
-        countryList: ArrayList<Country>
-    ): List<Country> {
-        return countryList.filter { it.name.contains(constraint, true) }
-    }
-
     interface CountryListListener {
         fun onClickItem(country: Country)
-        fun onSearchNotFound()
-        fun onSearchFound()
-        fun hideLoading()
     }
 }

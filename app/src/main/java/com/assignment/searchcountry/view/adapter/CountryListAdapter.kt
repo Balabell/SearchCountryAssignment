@@ -18,7 +18,7 @@ class CountryListAdapter(
 
     private var countryFilterList: MutableList<Country>
 
-    lateinit var context: Context
+    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context

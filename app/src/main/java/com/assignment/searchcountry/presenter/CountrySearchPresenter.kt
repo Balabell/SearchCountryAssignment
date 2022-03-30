@@ -19,19 +19,13 @@ class CountrySearchPresenter(private val view: CountrySearchInterface) {
     fun onQueryTextChange(input: String?, countryList: List<Country>) {
         view.showLoading()
         if (input.isNullOrEmpty()) {
-            view.apply {
-                updateCountryList(countryList)
-                onSearchFound()
-            }
+            view.onSearchFound(countryList)
         } else {
             val filterList = getFilterList(input, countryList)
             if (filterList.size == 0) {
                 view.onSearchNotFound()
             } else {
-                view.apply {
-                    updateCountryList(filterList.sortedBy { it.name })
-                    onSearchFound()
-                }
+                view.onSearchFound(filterList.sortedBy { it.name })
             }
         }
     }

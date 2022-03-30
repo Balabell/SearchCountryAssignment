@@ -58,8 +58,7 @@ class CountrySearchPresenterTest {
 
         // then
         verify(view).showLoading()
-        verify(view).updateCountryList(countryList)
-        verify(view).onSearchFound()
+        verify(view).onSearchFound(countryList)
         verifyNoMoreInteractions(view)
     }
 
@@ -73,8 +72,7 @@ class CountrySearchPresenterTest {
 
         // then
         verify(view).showLoading()
-        verify(view).updateCountryList(countryList)
-        verify(view).onSearchFound()
+        verify(view).onSearchFound(countryList)
         verifyNoMoreInteractions(view)
     }
 
@@ -84,6 +82,7 @@ class CountrySearchPresenterTest {
         val input = "nor"
         val expectedCountryFilterList = countryList
             .filter { it.name.contains(input, true) }
+            .sortedBy { it.name }
             .toMutableList()
 
         // when
@@ -91,8 +90,7 @@ class CountrySearchPresenterTest {
 
         // then
         verify(view).showLoading()
-        verify(view).updateCountryList(expectedCountryFilterList)
-        verify(view).onSearchFound()
+        verify(view).onSearchFound(expectedCountryFilterList)
         verifyNoMoreInteractions(view)
     }
 }

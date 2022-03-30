@@ -46,10 +46,6 @@ class CountrySearchActivity : AppCompatActivity(),
         })
     }
 
-    override fun updateCountryList(countryList: List<Country>) {
-        countryListAdapter.updateCountryList(countryList.toMutableList())
-    }
-
     override fun showLoading() {
         binding.apply {
             pbLoading.visibility = VISIBLE
@@ -86,8 +82,9 @@ class CountrySearchActivity : AppCompatActivity(),
         }
     }
 
-    override fun onSearchFound() {
+    override fun onSearchFound(countryList: List<Country>) {
         hideLoading()
+        updateCountryList(countryList)
         binding.apply {
             rvCountryList.visibility = VISIBLE
             llNoSearchFound.visibility = GONE
@@ -99,5 +96,9 @@ class CountrySearchActivity : AppCompatActivity(),
             pbLoading.visibility = GONE
             rvCountryList.visibility = VISIBLE
         }
+    }
+
+    private fun updateCountryList(countryList: List<Country>) {
+        countryListAdapter.updateCountryList(countryList.toMutableList())
     }
 }
